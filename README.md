@@ -8,7 +8,7 @@ from https://github.com/fortify-sample-eightball.git:
 
 1. `mkdir derivedRepo && cd derivedRepo && git init`  
   Set up new, empty repository and `cd` into this new repository
-2. `git pull https://github.com/fortify/repo-as-template.git`  
+2. `git pull https://github.com/rsenden/repo-as-template.git`  
   Pull the contents of the `repo-as-template` repository
 3. `./repo-as-template/setup.sh https://github.com/fortify/sample-eightball.git`  
   Pull the contents of the repository that we want to derive from, and configure this repository as a derived repository
