@@ -65,7 +65,8 @@ function createReadme() {
 
 *Describe derived repository contents*
 
-This project is derived from $remoteRepo.
+This repository is derived from $remoteRepo. To update this repository with updated 
+content from $remoteRepo, please run \`./repo-as-template/pull.sh\`. 
 EOF
 }
 
