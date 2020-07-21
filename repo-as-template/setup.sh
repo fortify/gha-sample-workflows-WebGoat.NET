@@ -61,7 +61,7 @@ function createReadme() {
   cat <<EOF > "$rootDir/README.md"
 # Derived from $remoteRepo
 
-*Please run the `./run-after-clone.sh` script after cloning this repository*
+*Please run the \`./run-after-clone.sh\` script after cloning this repository*
 
 *Describe derived repository contents*
 
