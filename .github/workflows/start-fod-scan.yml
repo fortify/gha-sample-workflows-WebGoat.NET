@@ -27,7 +27,7 @@ jobs:
         if: always()
         with:
           name: scancentral-logs
-          path: $Env:LOCALAPPDATA/Fortify/scancentral/log
+          path: C:/Users/runneradmin/AppData/Local/Fortify/scancentral/log # Any way we can reference %LOCALAPPDATA%
       - uses: actions/upload-artifact@v2
         if: always()
         with:
