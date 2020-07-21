@@ -69,4 +69,4 @@ This project is derived from $remoteRepo.
 EOF
 }
 
-rmTemplateReadme && pullRemote && moveOrgReadme && copyResources && createPullScript && runAfterClone && commit && createReadme
+moveTemplateReadme && pullRemote && moveOrgReadme && copyResources && createPullScript && runAfterClone && commit && createReadme
