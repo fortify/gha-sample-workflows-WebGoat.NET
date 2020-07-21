@@ -22,8 +22,8 @@ fi
 
 remoteRepo=$1
 
-function rmTemplateReadme() {
-  git rm -f "$rootDir/README.md" && git commit -m "Remove template README.md"
+function moveTemplateReadme() {
+  mv -v "$rootDir/README.md" "$rootDir/README-template.md" && git add . && git commit -m "README.md -> README-template.md"
 }
 
 function pullRemote() {
