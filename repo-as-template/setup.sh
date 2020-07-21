@@ -27,7 +27,7 @@ function rmTemplateReadme() {
 }
 
 function pullRemote() {
-  git pull --allow-unrelated-histories "$remoteRepo" && git add . && git commit -m "Pull $1"
+  git pull --allow-unrelated-histories "$remoteRepo" --no-commit && git add . && git commit -m "Pull $1"
 }
 
 function moveOrgReadme() {
