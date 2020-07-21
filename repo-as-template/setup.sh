@@ -27,7 +27,7 @@ function rmTemplateReadme() {
 }
 
 function pullRemote() {
-  git pull "$remoteRepo" && git add . && git commit -m "Pull $1"
+  git pull --allow-unrelated-histories "$remoteRepo" && git add . && git commit -m "Pull $1"
 }
 
 function moveOrgReadme() {
@@ -44,7 +44,7 @@ function createPullScript() {
   cat <<EOF > "$templateDir/pull.sh"
 #!/bin/bash
 # This script pulls the latest changes from the main sample repository
-git pull "$remoteRepo" --no-edit
+git pull "$remoteRepo" --allow-unrelated-histories --no-edit
 EOF
 }
 
