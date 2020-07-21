@@ -17,7 +17,7 @@ jobs:
       - uses: fortify-actions/setup-scancentral-client@v1
       - uses: fortify-actions/setup-fod-uploader@v1
       - run: scancentral package -bt msbuild -bf WebGoat.NET.sln -o package.zip
-      - run: java -jar $FOD_UPLOAD_JAR -z package.zip -aurl https://api.ams.fortify.com/ -purl https://ams.fotify.com/ -rid "$FOD_RELEASE_ID" -tc "$FOD_TENANT" -uc "$FOD_USER" "$FOD_PAT" -ep 2 -pp 1
+      - run: java -jar %FOD_UPLOAD_JAR% -z package.zip -aurl https://api.ams.fortify.com/ -purl https://ams.fotify.com/ -rid "%FOD_RELEASE_ID%" -tc "%FOD_TENANT%" -uc "%FOD_USER%" "%FOD_PAT%" -ep 2 -pp 1
         env: 
           FOD_TENANT: FortifyPS  
           FOD_USER: ${{ secrets.FOD_USER }}
@@ -27,7 +27,7 @@ jobs:
         if: always()
         with:
           name: scancentral-logs
-          path: ~/.fortify/scancentral/log
+          path: %LOCALAPPDATA%/Fortify/scancentral/log
       - uses: actions/upload-artifact@v2
         if: always()
         with:
