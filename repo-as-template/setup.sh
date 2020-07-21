@@ -37,7 +37,7 @@ function moveOrgReadme() {
 }
 
 function copyResources() {
-  cp -v "$resourcesDir/*" "$rootDir";
+  for f in .gitattributes run-after-clone.sh; do cp -v "$resourcesDir/$f" "$rootDir/$f"; done
 }
 
 function createPullScript() {
