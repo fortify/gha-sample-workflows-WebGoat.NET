@@ -27,7 +27,7 @@ jobs:
         if: always()
         with:
           name: scancentral-logs
-          path: %LOCALAPPDATA%/Fortify/scancentral/log
+          path: ${{ LOCALAPPDATA }}/Fortify/scancentral/log
       - uses: actions/upload-artifact@v2
         if: always()
         with:
