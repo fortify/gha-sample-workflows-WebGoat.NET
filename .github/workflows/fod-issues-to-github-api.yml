@@ -11,10 +11,10 @@ jobs:
       - uses: fortify/gha-fod-generate-sarif@master
         with:
           base-url: https://ams.fortify.com
-          tenant: FortifyPS
+          tenant: ${{ secrets.FOD_TENANT }}
           user: ${{ secrets.FOD_USER }}
           password: ${{ secrets.FOD_PAT }}
-          release-id: 251961
+          release-id: ${{ secrets.FOD_RELEASE_ID }}
           output: ./sarif/output.sarif
       - uses: github/codeql-action/upload-sarif@v1
         with:

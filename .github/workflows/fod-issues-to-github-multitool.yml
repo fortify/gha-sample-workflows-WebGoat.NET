@@ -12,10 +12,10 @@ jobs:
       - uses: fortify/gha-fod-download-fpr@master
         with:
           base-url: https://ams.fortify.com
-          tenant: FortifyPS
+          tenant: ${{ secrets.FOD_TENANT }}
           user: ${{ secrets.FOD_USER }}
           password: ${{ secrets.FOD_PAT }}
-          release-id: 251961
+          release-id: ${{ secrets.FOD_RELEASE_ID }}
           outputDir: ./fpr
       - uses: fortify/gha-fpr-to-sarif@master
         with:
