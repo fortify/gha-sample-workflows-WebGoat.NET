@@ -1,4 +1,4 @@
-name: Start FoD scan
+name: FoD SAST Scan and Import
 
 on: [workflow_dispatch]
 
