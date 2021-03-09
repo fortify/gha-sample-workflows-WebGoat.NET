@@ -1,0 +1,33 @@
+name: Import foD results to GitHub
+
+on: [workflow_dispatch]
+
+jobs:
+  FoD-Import:
+    runs-on: windows-latest
+
+    steps:
+      - name: Export results to GitHub-optimized SARIF
+        uses: fortify/gha-export-vulnerabilities@v1
+        with:
+          fod_base_url: https://ams.fortify.com/
+          fod_tenant: ${{ secrets.FOD_TENANT }}
+          fod_user: ${{ secrets.FOD_USER }}
+          fod_password: ${{ secrets.FOD_PAT }}
+          fod_release_id: ${{ secrets.FOD_RELEASE_ID }}
+      - name: Import results to GitHub Security Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: ./gh-fortify-sast.sarif
+      - name: Archive ScanCentral logs
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: scancentral-logs
+          path: C:/Users/runneradmin/AppData/Local/Fortify/scancentral/log # Any way we can reference %LOCALAPPDATA%
+      - name: Archive ScanCentral source code package
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: package.zip
+          path: package.zip
