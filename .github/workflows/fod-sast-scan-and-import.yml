@@ -1,0 +1,57 @@
+name: Start FoD scan
+
+on: [workflow_dispatch]
+
+jobs:
+  FoD-SAST-Scan-And-Import:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check Out Source Code
+        uses: actions/checkout@v2
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.0
+        with:
+          vs-version: 10.0
+      - name: Setup Java
+        uses: actions/setup-java@v1     # Required for ScanCentral Client and FoD Uploader
+        with:
+          java-version: 1.8
+      - name: Setup Fortify ScanCentral Client
+        uses: fortify-actions/setup-scancentral-client@v1
+      - name: Setup Fortify on Demand Uploader
+        uses: fortify-actions/setup-fod-uploader@v1
+   
+      - name: Package source code
+        run: scancentral package -bt msbuild -bf WebGoat.NET.sln -o package.zip
+      - name: Upload package and start FoD scan
+        run: java -jar "$Env:FOD_UPLOAD_JAR" -z package.zip -aurl https://api.ams.fortify.com/ -purl https://ams.fotify.com/ -rid "$Env:FOD_RELEASE_ID" -tc "$Env:FOD_TENANT" -uc "$Env:FOD_USER" "$Env:FOD_PAT" -ep 2 -pp 1
+        env: 
+          FOD_TENANT: ${{ secrets.FOD_TENANT }}  
+          FOD_USER: ${{ secrets.FOD_USER }}
+          FOD_PAT: ${{ secrets.FOD_PAT }}
+          FOD_RELEASE_ID: ${{ secrets.FOD_RELEASE_ID }}
+      - name: Export results to GitHub-optimized SARIF
+        uses: fortify/gha-export-vulnerabilities@v1
+        with:
+          fod_base_url: https://ams.fotify.com/
+          fod_tenant: ${{ secrets.FOD_TENANT }}
+          fod_user: ${{ secrets.FOD_USER }}
+          fod_password: ${{ secrets.FOD_PAT }}
+          fod_release_id: ${{ secrets.FOD_RELEASE_ID }}
+      - name: Import results to GitHub Security Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: ./gh-fortify-sast.sarif
+      - name: Archive ScanCentral logs
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: scancentral-logs
+          path: C:/Users/runneradmin/AppData/Local/Fortify/scancentral/log # Any way we can reference %LOCALAPPDATA%
+      - name: Archive ScanCentral source code package
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: package.zip
+          path: package.zip
