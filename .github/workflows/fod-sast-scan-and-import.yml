@@ -34,7 +34,7 @@ jobs:
       - name: Export results to GitHub-optimized SARIF
         uses: fortify/gha-export-vulnerabilities@v1
         with:
-          fod_base_url: https://ams.fotify.com/
+          fod_base_url: https://ams.fortify.com/
           fod_tenant: ${{ secrets.FOD_TENANT }}
           fod_user: ${{ secrets.FOD_USER }}
           fod_password: ${{ secrets.FOD_PAT }}
