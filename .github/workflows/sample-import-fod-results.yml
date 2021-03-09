@@ -7,6 +7,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          
       - name: Export results to GitHub-optimized SARIF
         uses: fortify/gha-export-vulnerabilities@v1
         with:
