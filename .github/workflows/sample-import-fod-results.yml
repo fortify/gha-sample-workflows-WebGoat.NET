@@ -7,6 +7,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Check Out Source Code # We don't need source code, but upload-sarif action wants a git repo
+        uses: actions/checkout@v2
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
