@@ -26,15 +26,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: ./gh-fortify-sast.sarif
-      - name: Archive ScanCentral logs
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: scancentral-logs
-          path: C:/Users/runneradmin/AppData/Local/Fortify/scancentral/log # Any way we can reference %LOCALAPPDATA%
-      - name: Archive ScanCentral source code package
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: package.zip
-          path: package.zip
