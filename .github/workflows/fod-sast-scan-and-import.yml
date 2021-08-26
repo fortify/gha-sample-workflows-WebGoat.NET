@@ -25,7 +25,7 @@ jobs:
       - name: Package source code
         run: scancentral package -bt msbuild -bf WebGoat.NET.sln -o package.zip
       - name: Upload package and start FoD scan
-        run: java -jar "$Env:FOD_UPLOAD_JAR" -z package.zip -aurl https://api.ams.fortify.com/ -purl https://ams.fotify.com/ -rid "$Env:FOD_RELEASE_ID" -tc "$Env:FOD_TENANT" -uc "$Env:FOD_USER" "$Env:FOD_PAT" -ep 2 -pp 0 -I 1 -apf
+        run: java -jar "$Env:FOD_UPLOAD_JAR" -z package.zip -aurl https://api.ams.fortify.com/ -purl https://ams.fortify.com/ -rid "$Env:FOD_RELEASE_ID" -tc "$Env:FOD_TENANT" -uc "$Env:FOD_USER" "$Env:FOD_PAT" -ep 2 -pp 0 -I 1 -apf
         env: 
           FOD_TENANT: ${{ secrets.FOD_TENANT }}  
           FOD_USER: ${{ secrets.FOD_USER }}
